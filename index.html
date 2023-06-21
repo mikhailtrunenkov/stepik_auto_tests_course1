@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mikhail Trunenkov - official web-site</title>
+        <style>
+            html, body {
+                padding: 0;
+                margin: 0;
+                font-size: 20px;
+                font-family:Arial, Helvetica, sans-serif;
+            }
+            a {
+                color: black;
+                margin-right: 30px;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            header {
+                height: 100px;
+            }
+            .fixed-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                height: 100%;
+            }
+            header > div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            button {
+                font-size: 14px;
+                padding: 15px;
+                border-radius: 10px;
+            }
+            .light-button {
+                background-color: transparent;
+                border: 1px solid black;
+            }
+            .dark-button {
+                background-color: blue;
+                color: white;
+                border: 1px solid black;
+            }
+            h1 {
+                font-size: 60px;
+                margin: 0 0 20px 0;
+            }
+            .first-block > div {
+                height: 500px;
+                background-image: url('/Trunenkov_Mikhail.jpg');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center right;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+            }
+            .subtitle {
+                margin: 30px;
+            }
+            .layout-container {
+                position: fixed;
+                background-color: #a8a8a88a;
+                width: 100%;
+                height: 100%;
+                display: none;
+                align-items: center;
+                justify-content: center;
+            }
+            .layout {
+                background-color: white;
+                border-radius: 10px;
+                width: 400px;
+                padding: 30px;          
+            }
+
+            .layout input {
+                font-size: 24px;
+                width: 100%;
+                margin-bottom: 25px;
+            }
+
+            .layout h2 {
+                margin: 0 0 30px 0;
+                font-size: 30px;
+            }
+
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script>
+        $(function(){
+            let layoutContainer = $('.layout-container');
+            $('button').on('click', function(){
+                layoutContainer.css('display', 'flex')
+            });
+
+            layoutContainer.on('click', function(e){
+                if(this === e.target) {
+                    layoutContainer.css('display', 'none');   
+                }
+            })
+
+            $('.layout button').on('click', function(){
+                let request = {
+                    'name': $('.layout input[name="name"]').val(),
+                    'email': $('.layout input[name="email"]').val()
+                };
+                
+                $.post('/api.php', request, function(response){
+                    if(response == '1') {
+                        layoutContainer.css('display', 'none');
+                    } else {
+                        alert('Что-то пошло не так :(');
+                    }
+
+                });
+            });
+
+        });
+        </script>
+
+    </head>
+    <body>
+        <div class="layout-container">
+            <div class="layout">
+                <h2>Send offer</h2>
+                <input type="text" name="name" placeholder="Ваше Имя">
+                <input type="text" name="email" placeholder="Ваш E-mail">
+                <button class="light-button">Отправить</button>
+            </div>
+        </div>
+            
+        <header>
+            <div class="fixed-container">
+                <nav>
+                    <a href="#">Услуги</a>
+                    <a href="#">Портфолио</a>
+                    <a href="#">Стоимость</a>
+                </nav>
+                <div> +7-000-000-00-00
+                    &nbsp;&nbsp;&nbsp;
+                    <button class="light-button">Заказать звонок</button>
+                </div>
+            </div>
+        </header>
+        <section class="first-block">
+            <div class="fixed-container">
+                <h1>Mikhail Trunenkov</h1>
+                <p class="subtitle">QA engineer</p>
+                <button class="dark-button">Узнать больше</button>
+            </div>
+           
+            
+
+        </section>
+
+        <h1>Mikhail Trunenkov - official web-site</h1>
+        <h2>QA engineer</h2>
+        Write me <a href = "https://t.me/Mikhail_Trunenkov" target="_blank"> here <a>
+         <div class="container">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>    
+    </body>
+</html>
